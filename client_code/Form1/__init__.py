@@ -1,6 +1,7 @@
 from ._anvil_designer import Form1Template
 from anvil import *
 import plotly.graph_objects as go
+from datetime import timedelta
 
 class Form1(Form1Template):
   def __init__(self, **properties):
@@ -12,6 +13,17 @@ class Form1(Form1Template):
     self.total_seconds = 0      # Đếm thời gian thực tế
     self.temp_box.text = 30
     self.timer_1.interval = 0
+    
+    # Tạo danh sách từ 0:00 đến 20:00 (tức 1200 giây)
+    time_list = []
+
+    for i in range(0, 20 * 60 + 1):  # 0 đến 1200
+      t = timedelta(seconds=i)
+      minutes, seconds = divmod(t.seconds, 60)
+      time_list.append(f"{minutes:02}:{seconds:02}")
+
+    # In ra danh sách
+    print(time_list)
 
 
   def start_button_click(self, **event_args):
