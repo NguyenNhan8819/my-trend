@@ -30,10 +30,11 @@ class Form1(Form1Template):
       self.data_points.append((minute, temp))
 
       self.total_seconds += 5
-      self.update_plot()
+      self.fig = anvil.server.call('update_plot')
+      # self.update_plot()
       self.status_label.text = f"Đã thêm {temp}°C tại phút {minute}"
 
     except ValueError:
       self.status_label.text = "Không ghi: nhiệt độ chưa hợp lệ"
 
-    self.plot_1.figure = fig
+    self.plot_1.figure = self.fig
