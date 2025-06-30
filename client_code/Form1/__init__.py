@@ -24,7 +24,8 @@ class Form1(Form1Template):
 
     # In ra danh sách
     print(time_list)
-
+  def time (self, **event_args):
+    
 
   def start_button_click(self, **event_args):
     """Khi nhấn nút Bắt đầu"""
@@ -36,6 +37,7 @@ class Form1(Form1Template):
   def timer_1_tick(self, **event_args):
     """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
     """Chạy mỗi 5 giây"""
+    
     try:
       temp = float(self.temp_box.text)
       minute = self.total_seconds // 5
