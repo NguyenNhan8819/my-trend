@@ -13,26 +13,16 @@ class Form1(Form1Template):
     self.total_seconds = 0      # Đếm thời gian thực tế
     self.temp_box.text = 30
     self.timer_1.interval = 0
+    self.time=0
     
     # Tạo danh sách từ 0:00 đến 20:00 (tức 1200 giây)
-    time_list = []
-
-    for i in range(0, 20 * 60 + 1):  # 0 đến 1200
-      t = timedelta(seconds=i)
-      minutes, seconds = divmod(t.seconds, 60)
-      time_list.append(f"{minutes:02}:{seconds:02}")
-
-    # In ra danh sách
-    print(time_list)
-  def time (self, **event_args):
-    
+    self.time_list = []
 
   def start_button_click(self, **event_args):
     """Khi nhấn nút Bắt đầu"""
     self.timer_1.interval = 5
     self.start_button.enabled = False  # Không cho nhấn lại
     self.status_label.text = "Đang ghi dữ liệu mỗi 5 giây..."
-
 
   def timer_1_tick(self, **event_args):
     """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
@@ -70,4 +60,15 @@ class Form1(Form1Template):
     # )
     self.plot_1.data = data
     print (self.data_points)
+
+  def timer_2_tick(self, **event_args):
+    """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
+    self.timer_2.interval = 1
+    self.time +=1
+    t = timedelta(seconds=self.time)
+    minutes, seconds = divmod(t.seconds, 60)
+    self.time_list.append(f"{minutes:02}:{seconds:02}")
+
+    # In ra danh sách
+    print(self.time_list)
     
