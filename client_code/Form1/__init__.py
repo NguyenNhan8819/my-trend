@@ -13,14 +13,13 @@ class Form1(Form1Template):
     self.total_seconds = 0      # Đếm thời gian thực tế
     self.temp_box.text = 30
     self.timer_1.interval = 0
+    self.timer_2.interval = 0
     self.time=0
-    
-    # Tạo danh sách từ 0:00 đến 20:00 (tức 1200 giây)
-    self.time_list = []
 
   def start_button_click(self, **event_args):
     """Khi nhấn nút Bắt đầu"""
     self.timer_1.interval = 5
+    self.timer_2.interval = 1
     self.start_button.enabled = False  # Không cho nhấn lại
     self.status_label.text = "Đang ghi dữ liệu mỗi 5 giây..."
 
@@ -30,13 +29,11 @@ class Form1(Form1Template):
     
     try:
       temp = float(self.temp_box.text)
-      minute = self.total_seconds // 5
+      minute = self.time_list
       self.data_points.append((minute, temp))
-
       self.total_seconds += 5
       self.update_plot()
       self.status_label.text = f"Đã thêm {temp}°C tại phút {minute}"
-
     except ValueError:
       self.status_label.text = "Không ghi: nhiệt độ chưa hợp lệ"
   def update_plot(self):
@@ -61,14 +58,11 @@ class Form1(Form1Template):
     self.plot_1.data = data
     print (self.data_points)
 
-  def timer_2_tick(self, **event_args):
-    """This method is called Every [interval] seconds. Does not trigger if [interval] is 0."""
-    self.timer_2.interval = 1
+  def timer_2_tick(self, **event_args): 
     self.time +=1
     t = timedelta(seconds=self.time)
     minutes, seconds = divmod(t.seconds, 60)
-    self.time_list.append(f"{minutes:02}:{seconds:02}")
+    self.time_list = f"{minutes:02}:{seconds:02}"
 
-    # In ra danh sách
-    print(self.time_list)
+
     
