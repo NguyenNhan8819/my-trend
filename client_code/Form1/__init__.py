@@ -73,15 +73,14 @@ class Form1(Form1Template):
     temps = [100 + (i % 10) * 10 for i in range(len(times))]  # ví dụ: 100, 110, ...
 
     # Tạo biểu đồ
-    fig = go.Figure()
-
-    # fig.add_trace(go.Scatter(
-    #   x=[t.strftime("%H:%M") for t in times],  # hiển thị giờ:phút
-    #   y=temps,
-    #   mode="lines+markers",
-    #   name="Nhiệt độ"
-    # ))
-
+    fig = go.Figure(
+      data = [go.Scatter(
+        x=[t.strftime("%H:%M") for t in times],  # hiển thị giờ:phút
+        y=temps,
+        mode="lines+markers",
+        name="Nhiệt độ"
+      )]
+    )
     # Cấu hình trục
     fig.update_layout(
       title="Biểu đồ nhiệt độ theo thời gian",
