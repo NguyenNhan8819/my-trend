@@ -1,7 +1,7 @@
 from ._anvil_designer import Form1Template
 from anvil import *
 import plotly.graph_objects as go
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 class Form1(Form1Template):
   def __init__(self, **properties):
@@ -10,11 +10,13 @@ class Form1(Form1Template):
 
     # Any code you write here will run before the form opens.
     self.data_points = []       # Lưu (phút, nhiệt độ)
-    self.total_seconds = 0      # Đếm thời gian thực tế
     self.temp_box.text = 30
     self.timer_1.interval = 0
     self.timer_2.interval = 0
     self.time=0
+    self.plot_trend()
+
+    
 
   def start_button_click(self, **event_args):
     """Khi nhấn nút Bắt đầu"""
@@ -31,7 +33,6 @@ class Form1(Form1Template):
       temp = float(self.temp_box.text)
       minute = self.time_list
       self.data_points.append((minute, temp))
-      self.total_seconds += 5
       self.update_plot()
       self.status_label.text = f"Đã thêm {temp}°C tại phút {minute}"
     except ValueError:
@@ -55,7 +56,7 @@ class Form1(Form1Template):
     #   yaxis_title="Nhiệt độ (°C)",
     #   template="plotly_white"
     # )
-    self.plot_1.data = data
+    # self.plot_1.data = data
     print (self.data_points)
 
   def timer_2_tick(self, **event_args): 
@@ -63,6 +64,42 @@ class Form1(Form1Template):
     t = timedelta(seconds=self.time)
     minutes, seconds = divmod(t.seconds, 60)
     self.time_list = f"{minutes:02}:{seconds:02}"
+  def plot_trend(self):
+    # Tạo danh sách thời gian từ 00:00 đến 24:00 với bước mỗi 15 phút
+    times = [datetime(2024, 1, 1, 0, 0) + timedelta(seconds=10 * i) for i in range(10)]
+    print (times)
+
+    # Dữ liệu nhiệt độ giả lập (hoặc bạn có thể lấy từ nguồn thực)
+    temps = [100 + (i % 10) * 10 for i in range(len(times))]  # ví dụ: 100, 110, ...
+
+    # Tạo biểu đồ
+    fig = go.Figure()
+
+    # fig.add_trace(go.Scatter(
+    #   x=[t.strftime("%H:%M") for t in times],  # hiển thị giờ:phút
+    #   y=temps,
+    #   mode="lines+markers",
+    #   name="Nhiệt độ"
+    # ))
+
+    # Cấu hình trục
+    fig.update_layout(
+      title="Biểu đồ nhiệt độ theo thời gian",
+      xaxis_title="Thời gian (giờ:phút)",
+      yaxis_title="Nhiệt độ (°C)",
+      xaxis=dict(
+        tickangle=45,
+        tickmode='auto',
+        nticks=12,
+        range=[0, len(times) - 1]
+      ),
+      yaxis=dict(range=[0, 500]),
+      height=500
+    )
+
+    # Hiển thị biểu đồ
+    self.plot_1.figure = fig
+    
 
 
     
