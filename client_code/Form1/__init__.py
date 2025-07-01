@@ -9,9 +9,8 @@ class Form1(Form1Template):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    self.myTrend = Trend.say_hello()
+    self.plot_1.figure = Trend.init_trend(self)
     
-
     # Any code you write here will run before the form opens.
 
   #   self.data_points = []       # Lưu (phút, nhiệt độ)
