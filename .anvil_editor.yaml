@@ -5,7 +5,8 @@ unique_ids:
   forms:
     Form1: YXBPCHRZCL7CPTKDKHWUMOIAA2NQ5M4Z
     Form1.RowTemplate1: '1751252844709991083788263.878'
-  modules: {}
+  modules:
+    Trend: '1751355447933879549410735.0676'
   scripts: {}
   server_modules:
     ServerModule1: '1751255084062566577262616.1112'
