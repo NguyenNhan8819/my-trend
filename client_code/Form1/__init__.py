@@ -13,10 +13,11 @@ class Form1(Form1Template):
     tick_vals = fig.layout['xaxis']['tickvals']
     self.plot_1.data = go.Scatter(
       x=tick_vals,
-      y=list(range(11)),
+      y=list(i * 50 for i in range(11)),
       mode='lines',
-      name='Dữ liệu trống'
+      name='Dữ liệu trống',
     )
+    fig.update_layout ()
     print (tick_vals)
     # Any code you write here will run before the form opens.
 
