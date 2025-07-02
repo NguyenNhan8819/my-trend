@@ -9,8 +9,15 @@ class Form1(Form1Template):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    self.plot_1.figure = Trend.init_trend(self)
-    
+    fig = Trend.init_figure(self)
+    tick_vals = fig.layout['xaxis']['tickvals']
+    self.plot_1.data = go.Scatter(
+      x=tick_vals,
+      y=[0,100,200,300,100,200,100,400,300,100,150],
+      mode='lines',
+      name='Dữ liệu trống'
+    )
+    print (tick_vals)
     # Any code you write here will run before the form opens.
 
   #   self.data_points = []       # Lưu (phút, nhiệt độ)
