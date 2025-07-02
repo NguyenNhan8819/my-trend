@@ -24,7 +24,7 @@ def init_figure (self, **properties):
         'tickmode':'array',
         'tickvals':self.tick_vals,
         'ticktext':self.tick_vals,
-        'tickwidth':1
+        'tickheigh':5
       },
     yaxis={
       'title': {

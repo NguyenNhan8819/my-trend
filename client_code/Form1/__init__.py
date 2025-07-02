@@ -13,7 +13,7 @@ class Form1(Form1Template):
     tick_vals = fig.layout['xaxis']['tickvals']
     self.plot_1.data = go.Scatter(
       x=tick_vals,
-      y=[0,100,200,300,100,200,100,400,300,100,150],
+      y=list(range(11)),
       mode='lines',
       name='Dữ liệu trống'
     )
