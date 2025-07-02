@@ -4,21 +4,24 @@ import plotly.graph_objects as go
 from datetime import datetime, timedelta
 from .. import Trend
 
-
+def dual_axis_figure():
+  fig = go.Figure()
+  # ... (nội dung như trước)
+  return fig
 class Form1(Form1Template):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    fig = Trend.init_figure(self)
-    tick_vals = fig.layout['xaxis']['tickvals']
-    self.plot_1.data = go.Scatter(
-      x=tick_vals,
-      y=list(i * 50 for i in range(11)),
-      mode='lines',
-      name='Dữ liệu trống',
-    )
-    fig.update_layout ()
-    print (tick_vals)
+    self.plot_1.figure = dual_axis_figure()
+    # tick_vals = fig.layout['xaxis']['tickvals']
+    # self.plot_1.data = go.Scatter(
+    #   x=tick_vals,
+    #   y=list(i * 50 for i in range(11)),
+    #   mode='lines',
+    #   name='Dữ liệu trống',
+    # )
+    # fig.update_layout ()
+    # print (tick_vals)
     # Any code you write here will run before the form opens.
 
   #   self.data_points = []       # Lưu (phút, nhiệt độ)
