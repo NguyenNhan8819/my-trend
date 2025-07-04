@@ -8,23 +8,22 @@ class Form1(Form1Template):
   def __init__(self, **properties):
     self.init_components(**properties)
 
-    self.start_time = datetime(2025, 1, 1, 0, 0, 0)
-    self.time = 0
-    self.time_list = "00:00"
-    self.data_points = []
-
-    self.temp_box.text = 30
-
+    self.start_time = datetime(2025, 1, 1, 0, 0, 0) # Khởi tạo thời gian
+    self.data_points = [] # Tạo một list lưu trữ dữ liệu nhiệt độ theo thời gian
+    self.temp_box.text = 30 # Gán giá trị nhiệt độ ban đầu
+    # Tạo figure và gán data rỗng
     self.plot_1.figure = Trend.init_figure()
     self.plot_1.data = [go.Scatter(x=[], y=[], mode='lines', name='Nhiệt độ'),
                         go.Scatter(x=[],y=[],yaxis='y2',showlegend=False,
                                     hoverinfo='skip',
                                     mode='lines',
                                     line=dict(width=0)
-                      )]
-
-    self.timer_1.interval = 0
-    self.timer_2.interval = 0
+                                  )]
+    
+    self.time = 0
+    self.time_list = "00:00"
+    self.timer_1.interval = 0 # Ban đầu timer chưa hoạt động
+    self.timer_2.interval = 0 # Ban đầu timer chưa hoạt động
 
   def start_button_click(self, **event_args):
     self.timer_1.interval = 5    # Ghi mỗi 5 giây

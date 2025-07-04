@@ -36,10 +36,8 @@ def init_figure():
       },
       'range': [0, 500],
       'dtick': 50,
-      'fixedrange': True,
       'tickwidth': 1,
       'showline':True,
-      
     },
     yaxis2={  # Trục Y bên phải
     'title': {
@@ -53,5 +51,4 @@ def init_figure():
     'showline': True
     }
   )
-
   return fig
