@@ -51,6 +51,13 @@ def init_figure():
     'side': 'right',
     'showgrid': False,
     'showline': True
-    }
+    },
+    legend=dict(
+    x=0.95,           # Gần sát phải, nhưng không tràn qua trục y2
+    y=1.15,              # Trên cùng
+    xanchor='right',  # Căn phải
+    yanchor='top',
+    orientation='h'   # Giữ chiều dọc
+    )
   )
   return fig

@@ -37,7 +37,7 @@ class Form1(Form1Template):
       time_string = f"{minutes:02}:{seconds:02}"
       self.data_points.append((time_string, temp, dBT))
       self.update_plot_latest(self.data_points)
-      self.status_label.text = f"Đã thêm nhiệt độ {temp}°C và deltaBT {dBT} tại phút {time_string}"
+      self.status_label.text = f"Ghi nhận nhiệt độ {temp}°C và deltaBT {dBT} tại phút {time_string}"
       print (elapsed.seconds)
     except ValueError:
       self.status_label.text = "Không ghi: nhiệt độ chưa hợp lệ"
