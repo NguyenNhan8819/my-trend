@@ -11,13 +11,13 @@ class Form1(Form1Template):
     self.start_time = datetime(2025, 1, 1, 0, 0, 0) # Khởi tạo thời gian, ngày tháng năm chủ yếu đủ định dạng
     self.data_points = [] # Tạo một list lưu trữ dữ liệu nhiệt độ theo thời gian
     self.temp_box.text = 30 # Gán giá trị nhiệt độ ban đầu
+    self.deltaBT_box.text = 20 # Gán giá trị nhiệt độ ban đầu
     # Tạo figure và gán data rỗng
     self.plot_1.figure = Trend.init_figure()
     self.plot_1.data = [go.Scatter(x=[], y=[], mode='lines', name='Nhiệt độ'),
-                        go.Scatter(x=[],y=[],yaxis='y2',showlegend=False,
-                                    hoverinfo='skip',
-                                    mode='lines',
-                                    line=dict(width=0)
+                        go.Scatter(x=[],y=[],yaxis='y2',showlegend=True,
+                                    mode='lines', name='Delta BT',
+                                    line=dict(width=2)
                                   )]
     
     self.timer_1.interval = 0 # Ban đầu timer chưa hoạt động
@@ -31,12 +31,13 @@ class Form1(Form1Template):
   def timer_1_tick(self, **event_args):
     try:
       temp = float(self.temp_box.text)
+      dBT = float(self.deltaBT_box.text)
       elapsed = datetime.now() - self.now
       minutes, seconds = divmod(elapsed.seconds, 60)
       time_string = f"{minutes:02}:{seconds:02}"
-      self.data_points.append((time_string, temp))
-      self.update_plot_latest()
-      self.status_label.text = f"Đã thêm {temp}°C tại phút {time_string}"
+      self.data_points.append((time_string, temp, dBT))
+      self.update_plot_latest(self.data_points)
+      self.status_label.text = f"Đã thêm nhiệt độ {temp}°C và deltaBT {dBT} tại phút {time_string}"
       print (elapsed.seconds)
     except ValueError:
       self.status_label.text = "Không ghi: nhiệt độ chưa hợp lệ"
@@ -51,35 +52,41 @@ class Form1(Form1Template):
       x_data.append(dt)
       y_data.append(value)
     self.plot_1.data = [go.Scatter(x=x_data, y=y_data, mode='lines', name='Nhiệt độ'),
-                        go.Scatter(x=[],y=[],yaxis='y2',showlegend=False,
+                        go.Scatter(x=x_data,y=[],yaxis='y2',showlegend=False,
                                    hoverinfo='skip',
-                                   mode='lines',
+                                   mode='lines', name='Delta BT',
                                    line=dict(width=0)
                                   )
                         ]
     print ("X data la ", x_data)
     print(self.data_points)
     
-  def update_plot_latest(self):
-    if not self.data_points:
+  def update_plot_latest(self, dataList):
+    self.dataList = dataList
+    
+    if not self.dataList:
       return
 
     # Lấy điểm dữ liệu mới nhất
-    time_str, value = self.data_points[-1]
+    time_str, value, dBT = self.dataList[-1]
     minutes, seconds = map(int, time_str.split(":"))
     dt = self.start_time + timedelta(minutes=minutes, seconds=seconds)
 
-    # Nếu figure chưa có trace, khởi tạo nó
-    if not self.plot_1.data:
-      self.plot_1.data = [go.Scatter(x=[dt], y=[value], mode='lines', name='Nhiệt độ')]
-      return
+    # # Nếu figure chưa có trace, khởi tạo nó
+    # if not self.plot_1.data:
+    #   self.plot_1.data = [go.Scatter(x=[dt], y=[value], mode='lines', name='Nhiệt độ')]
+    #   return
 
     # Cập nhật trace đầu tiên (trace nhiệt độ)
     trace1 = self.plot_1.data[0]
     trace2 = self.plot_1.data[1]
     trace1.x.append(dt)
+    trace2.x.append(dt)
     trace1.y.append(value)
+    trace2.y.append(dBT)
     self.plot_1.data = [trace1,trace2]
+    print(trace1)
+    print(trace2)
     
 
 
