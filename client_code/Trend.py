@@ -45,6 +45,8 @@ def init_figure():
       'font': {'size': 13}
     },
     'range': [0, 50],
+    'dtick': 10,
+    'tickwidth': 1,
     'overlaying': 'y',
     'side': 'right',
     'showgrid': False,

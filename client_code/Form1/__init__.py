@@ -35,7 +35,7 @@ class Form1(Form1Template):
       minutes, seconds = divmod(elapsed.seconds, 60)
       time_string = f"{minutes:02}:{seconds:02}"
       self.data_points.append((time_string, temp))
-      self.update_plot()
+      self.update_plot_latest()
       self.status_label.text = f"Đã thêm {temp}°C tại phút {time_string}"
       print (elapsed.seconds)
     except ValueError:
@@ -59,6 +59,27 @@ class Form1(Form1Template):
                         ]
     print ("X data la ", x_data)
     print(self.data_points)
+    
+  def update_plot_latest(self):
+    if not self.data_points:
+      return
+
+    # Lấy điểm dữ liệu mới nhất
+    time_str, value = self.data_points[-1]
+    minutes, seconds = map(int, time_str.split(":"))
+    dt = self.start_time + timedelta(minutes=minutes, seconds=seconds)
+
+    # Nếu figure chưa có trace, khởi tạo nó
+    if not self.plot_1.data:
+      self.plot_1.data = [go.Scatter(x=[dt], y=[value], mode='lines', name='Nhiệt độ')]
+      return
+
+    # Cập nhật trace đầu tiên (trace nhiệt độ)
+    trace1 = self.plot_1.data[0]
+    trace2 = self.plot_1.data[1]
+    trace1.x.append(dt)
+    trace1.y.append(value)
+    self.plot_1.data = [trace1,trace2]
     
 
 
