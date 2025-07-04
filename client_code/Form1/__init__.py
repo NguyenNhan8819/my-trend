@@ -50,7 +50,6 @@ class Form1(Form1Template):
       dt = self.start_time +  timedelta(minutes=minutes, seconds=seconds)
       x_data.append(dt)
       y_data.append(value)
-      print('dt là :',dt)
     self.plot_1.data = [go.Scatter(x=x_data, y=y_data, mode='lines', name='Nhiệt độ'),
                         go.Scatter(x=[],y=[],yaxis='y2',showlegend=False,
                                    hoverinfo='skip',
