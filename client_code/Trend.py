@@ -13,18 +13,18 @@ def init_figure():
   fig.update_layout(
     title={
       'text': "Giản đồ máy rang",
-      'font': {'size': 13}
+      'font': {'size': 25}
     },
     xaxis={
       'title': {
-        'text': "Thời gian (phút:giây)",
+        'text': "Thời gian (phút)",
         'font': {'size': 13}
       },
       'range': [
         start_time,
         start_time + datetime.timedelta(minutes=30)
       ],
-      'dtick': 120000,  # mỗi 1 phút = 60.000 ms (do type=date)
+      'dtick': 120000,  # mỗi 2 phút = 120.000 ms (do type=date)
       'tickformat': '%M',
       'tickwidth': 1,
       'type': 'date',
@@ -42,8 +42,11 @@ def init_figure():
       
     },
     yaxis2={  # Trục Y bên phải
-    'title': "Tốc độ quạt (%)",
-    'range': [0, 100],
+    'title': {
+      'text': "Độ tăng nhiệt độ C/phút",
+      'font': {'size': 13}
+    },
+    'range': [0, 50],
     'overlaying': 'y',
     'side': 'right',
     'showgrid': False,
