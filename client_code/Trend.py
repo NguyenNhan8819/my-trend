@@ -25,7 +25,7 @@ def init_figure():
         start_time + datetime.timedelta(minutes=30)
       ],
       'dtick': 120000,  # mỗi 2 phút = 120.000 ms (do type=date)
-      'tickformat': '%M',
+      'tickformat': '%M:%S',
       'tickwidth': 1,
       'type': 'date',
     },
