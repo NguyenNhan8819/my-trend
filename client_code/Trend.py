@@ -7,10 +7,12 @@ def init_figure():
   start_time = datetime.datetime(2025, 1, 1, 0, 0, 0)
 
   # Tạo figure trống
-  fig = go.Figure()
-
-  # Cập nhật layout
-  fig.update_layout(
+  fig = go.Figure(
+    data=[
+      go.Scatter(x=[], y=[], mode="lines+markers", name='BT'),
+      go.Scatter(x=[], y=[], mode="lines", name='Delta BT', yaxis="y2")
+    ],
+    layout=go.Layout(
     title={
       'text': "Giản đồ máy rang",
       'font': {'size': 25}
@@ -58,6 +60,8 @@ def init_figure():
     xanchor='right',  # Căn phải
     yanchor='top',
     orientation='h'   # Giữ chiều dọc
-    )
+    ),
+    annotations=[]
+  )
   )
   return fig
