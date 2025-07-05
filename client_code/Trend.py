@@ -9,7 +9,7 @@ def init_figure():
   # Tạo figure trống
   fig = go.Figure(
     data=[
-      go.Scatter(x=[], y=[], mode="lines+markers", name='BT'),
+      go.Scatter(x=[], y=[], mode="lines", name='BT'),
       go.Scatter(x=[], y=[], mode="lines", name='Delta BT', yaxis="y2")
     ],
     layout=go.Layout(

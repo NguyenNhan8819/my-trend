@@ -94,9 +94,8 @@ class Form1(Form1Template):
 
   def update_annotation_button_click(self, **event_args):
     """This method is called when the button is clicked"""
-    anns = list (self.plot_1.figure.layout.annotations)+[self.add_annotation (self.data_points, "Điểm bắt đầu")]
-    self.plot_1.figure.update_layout(annotations=anns)
-    self.plot_1.figure = self.plot_1.figure
+    self.add_annotation (self.data_points, 'Bắt đầu')
+    self.plot_1.layout.annotations = self.annotations
     
   
     
