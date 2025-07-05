@@ -36,7 +36,7 @@ def init_figure():
         'text': "Nhiệt độ (°C)",
         'font': {'size': 13}
       },
-      'range': [0, 500],
+      'range': [0, 300],
       'dtick': 50,
       'tickwidth': 1,
       'showline':True,
