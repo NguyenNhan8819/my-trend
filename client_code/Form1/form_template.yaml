@@ -13,11 +13,6 @@ components:
     name: start_button
     properties: {role: filled-button, text: start_button}
     type: Button
-  - event_bindings: {click: update_annotation_button_click}
-    layout_properties: {grid_position: 'CSPDIQ,GLHCVP'}
-    name: update_annotation_button
-    properties: {role: filled-button, text: Update Annotation}
-    type: Button
   - layout_properties: {grid_position: 'SVFGYZ,ADJNGN'}
     name: status_label
     properties: {}
@@ -32,9 +27,49 @@ components:
     name: plot_1
     properties: {}
     type: Plot
+  - event_bindings: {click: charge_button_click}
+    layout_properties: {grid_position: 'BDKDBB,ZJMGXR'}
+    name: charge_button
+    properties: {role: filled-button, text: Charge}
+    type: Button
+  - event_bindings: {click: tp_button_click}
+    layout_properties: {grid_position: 'BDKDBB,OFERIL'}
+    name: tp_button
+    properties: {role: filled-button, text: TP}
+    type: Button
+  - event_bindings: {click: dryend_button_click}
+    layout_properties: {grid_position: 'BDKDBB,BCPYKB'}
+    name: dryend_button
+    properties: {role: filled-button, text: Dry end}
+    type: Button
+  - event_bindings: {click: fcStart_button_click}
+    layout_properties: {grid_position: 'BDKDBB,MIQZPU'}
+    name: fcStart_button
+    properties: {role: filled-button, text: FC Start}
+    type: Button
+  - event_bindings: {click: fcEnd_button_click}
+    layout_properties: {grid_position: 'BDKDBB,RYWIYN'}
+    name: fcEnd_button
+    properties: {role: filled-button, text: FC End}
+    type: Button
+  - event_bindings: {click: scStart_button_click}
+    layout_properties: {grid_position: 'BDKDBB,ZUXXEN'}
+    name: scStart_button
+    properties: {role: filled-button, text: SC Start}
+    type: Button
+  - event_bindings: {click: scEnd_button_click}
+    layout_properties: {grid_position: 'BDKDBB,TUIPWR'}
+    name: scEnd_button
+    properties: {role: filled-button, text: SC End}
+    type: Button
+  - event_bindings: {click: drop_button_click}
+    layout_properties: {grid_position: 'BDKDBB,KPNHMA'}
+    name: drop_button
+    properties: {role: filled-button, text: Drop}
+    type: Button
   layout_properties: {slot: default}
   name: content_panel
-  properties: {col_widths: '{}'}
+  properties: {col_widths: '{"ZJMGXR":8,"OFERIL":5,"BCPYKB":9,"MIQZPU":8,"RYWIYN":7,"ZUXXEN":9,"TUIPWR":7,"KPNHMA":7}'}
   type: ColumnPanel
 - layout_properties: {slot: nav-right}
   name: navbar_links

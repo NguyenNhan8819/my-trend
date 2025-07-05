@@ -41,12 +41,12 @@ class Form1(Form1Template):
     if not self.dataList:
       return
     # Lấy điểm dữ liệu mới nhất
-    time_str, value, dBT = self.dataList[-1]
+    time_str, bt, dBT = self.dataList[-1]
     minutes, seconds = map(int, time_str.split(":"))
     dt = self.start_time + timedelta(minutes=minutes, seconds=seconds)
     # # Cập nhật trace mà không gán lại .data
     self.plot_1.figure.data[0].x.append(dt)
-    self.plot_1.figure.data[0].y.append(value)
+    self.plot_1.figure.data[0].y.append(bt)
     self.plot_1.figure.data[1].x.append(dt)
     self.plot_1.figure.data[1].y.append(dBT)
     
@@ -54,26 +54,71 @@ class Form1(Form1Template):
     if not dataList:
       return
     # Lấy điểm dữ liệu mới nhất
-    time_str, value, dBT = dataList[-1]
+    time_str, bt, dBT = dataList[-1]
     minutes, seconds = map(int, time_str.split(":"))
     dt = self.start_time + timedelta(minutes=minutes, seconds=seconds)
     self.annotations.append(dict(
-      x=dt,
-      y=value,
-      xref="x",
-      yref="y",
-      text=f'{text} {value}',
-      showarrow=True,
-      arrowhead=0,
-      ax=30,
-      ay=30
+      x=dt,y=bt,xref="x",yref="y",
+      text=f'{text} {time_str}',              
+      font=dict(size=10,color="red"),                
+      arrowwidth=1,showarrow=True,arrowhead=0,ax=30,ay=30
     ))
-
-  def update_annotation_button_click(self, **event_args):
+    self.annotations.append(dict(
+      x=dt,y=bt,xref="x",yref="y",
+      text=f'{bt}',              
+      font=dict(size=10,color="red"),                
+      arrowwidth=1,showarrow=True,arrowhead=0,ax=30,ay=-30
+    ))
+  def charge_button_click(self, **event_args):
     """This method is called when the button is clicked"""
-    self.add_annotation (self.data_points, 'Bắt đầu')
+    self.add_annotation (self.data_points, 'Charge')
     self.plot_1.layout.annotations = self.annotations
-    
+    self.charge_button.enabled = False
+
+  def dryend_button_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    self.add_annotation (self.data_points, 'DE')
+    self.plot_1.layout.annotations = self.annotations
+    self.dryend_button.enabled = False
+
+  def tp_button_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    self.add_annotation (self.data_points, 'TP')
+    self.plot_1.layout.annotations = self.annotations
+    self.tp_button.enabled = False
+
+  def fcStart_button_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    self.add_annotation (self.data_points, 'FcS')
+    self.plot_1.layout.annotations = self.annotations
+    self.fcStart_button.enabled = False
+
+  def fcEnd_button_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    self.add_annotation (self.data_points, 'FcE')
+    self.plot_1.layout.annotations = self.annotations
+    self.fcEnd_button.enabled = False
+
+  def scStart_button_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    self.add_annotation (self.data_points, 'ScS')
+    self.plot_1.layout.annotations = self.annotations
+    self.scStart_button.enabled = False
+
+  def scEnd_button_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    self.add_annotation (self.data_points, 'ScE')
+    self.plot_1.layout.annotations = self.annotations
+    self.scEnd_button.enabled = False
+
+  def drop_button_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    self.add_annotation (self.data_points, 'Drop')
+    self.plot_1.layout.annotations = self.annotations
+    self.drop_button.enabled = False
+
+ 
+
   
     
 
