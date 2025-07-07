@@ -1,5 +1,8 @@
 allow_embedding: false
-dependencies: []
+dependencies:
+- dep_id: dep_tl1u3nrx1sqvpj
+  resolution_hints: {app_id: TQ2BBS7UWW3ZT2QE, name: Clone of Color Picker with change event, package_name: Color_Picker}
+  version: {branch: master}
 name: My trend
 package_name: My_trend
 renamed: true
