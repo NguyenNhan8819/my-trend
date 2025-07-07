@@ -6,6 +6,19 @@ class Form_WheelGra(Form_WheelGraTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    # Tạo ô chọn màu
+    self.color_picker = TextBox()
+    self.color_picker.type = "color"      # Kiểu input là color
+    self.color_picker.text = "#ff0000"    # Màu mặc định là đỏ
+    self.color_picker.role = "color-box"  # Tùy chọn: để CSS riêng nếu muốn
+
+    # Tạo nút để lấy màu
+    self.get_color_button = Button(text="Lấy màu đã chọn")
+    self.get_color_button.set_event_handler("click", self.get_color)
+
+    # Thêm vào form
+    self.add_component(self.color_picker)
+    self.add_component(self.get_color_button)
 
     # Any code you write here will run before the form opens.
     # fig =go.Figure(go.Sunburst(
@@ -51,3 +64,15 @@ class Form_WheelGra(Form_WheelGraTemplate):
     ))
     fig.update_layout(margin=dict(t=10, l=10, r=10, b=10))
     self.plot_1.figure = fig
+
+  # def btn_show_color_click(self, **event_args):
+  #   """This method is called when the button is clicked"""
+  #   color = self.call_js('get_color_value')
+  #   alert(f"Mã màu bạn chọn: #{color}")
+    
+
+  def get_color(self, **event_args):
+    # Lấy mã màu từ input
+    selected_color = self.color_picker.text
+    # Hiển thị lên alert
+    alert(f"Màu bạn chọn là: {selected_color}")
