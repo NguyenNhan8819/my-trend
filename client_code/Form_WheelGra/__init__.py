@@ -4,63 +4,37 @@ import plotly.graph_objects as go
 
 class Form_WheelGra(Form_WheelGraTemplate):
   def __init__(self, **properties):
-    # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    
 
-    # Any code you write here will run before the form opens.
-    # fig =go.Figure(go.Sunburst(
-    #   labels=["Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"],
-    #   parents=["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve" ],
-    #   values=[None, 14, 12, 10, 2, 6, 6, 4, 4],
-    #   branchvalues="total"
-    # ))
-    # fig.update_layout(margin = dict(t=0, l=0, r=0, b=0))
-
-    # self.plot_1.figure = fig
-    # Gốc dữ liệu
-    labels = ["Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"]
-    parents = ["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve"]
-    values = [10, 14, 12, 10, 2, 6, 6, 4, 4]
-    colors = [
-      "lightblue",   # Eve
-      "orange",      # Cain
-      "green",       # Seth
-      "red",         # Enos
-      "pink",        # Noam
-      "yellow",      # Abel
-      "purple",      # Awan
-      "brown",       # Enoch
-      "gray"         # Azura
-    ]
-
-    # Dịch thứ tự 1 lát (đây là ví dụ đơn giản, bạn có thể xoay nhiều hơn)
-    rotate_by = 1  # số bước lát muốn xoay
-    # n = len(labels)
-
-    # Xoay song song 3 danh sách
-    labels_rot = labels[rotate_by:] + labels[:rotate_by]
-    parents_rot = parents[rotate_by:] + parents[:rotate_by]
-    values_rot = values[rotate_by:] + values[:rotate_by]
-
+    # Tạo biểu đồ Sunburst với màu theo từng vòng
     fig = go.Figure(go.Sunburst(
-      labels=labels_rot,
-      parents=parents_rot,
-      values=values_rot,
-      marker=dict(colors=colors), 
-      hole=0.05
+      labels=[
+        "Root",             # Vòng 1
+        "Module A", "Module B",     # Vòng 2
+        "Sensor A1", "Sensor A2", "Sensor B1", "Sensor B2"  # Vòng 3
+      ],
+      parents=[
+        "",          # Root
+        "Root", "Root",      # Vòng 2
+        "Module A", "Module A", "Module B", "Module B"  # Vòng 3
+      ],
+      values=[
+        10,        # Root (10%)
+        15, 15,    # Vòng 2
+        20, 10,    # A1 + A2
+        20, 10     # B1 + B2
+      ],
+      branchvalues="total",
+      marker=dict(colors=[
+        "royalblue",      # Root
+        "orange", "orange",  # Vòng 2
+        "red", "red", "red", "red"  # Vòng 3
+      ])
     ))
-    fig.update_layout(margin=dict(t=10, l=10, r=10, b=10))
+
+    fig.update_layout(
+      margin=dict(t=10, l=10, r=10, b=10)
+    )
+
+    # Gán biểu đồ cho Plot component trong Anvil
     self.plot_1.figure = fig
-
-  # def btn_show_color_click(self, **event_args):
-  #   """This method is called when the button is clicked"""
-  #   color = self.call_js('get_color_value')
-  #   alert(f"Mã màu bạn chọn: #{color}")
-    
-
-  def get_color(self, **event_args):
-    # Lấy mã màu từ input
-    selected_color = self.color_picker.text
-    # Hiển thị lên alert
-    alert(f"Màu bạn chọn là: {selected_color}")
