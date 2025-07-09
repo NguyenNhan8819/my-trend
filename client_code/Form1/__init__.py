@@ -35,7 +35,7 @@ class Form1(Form1Template):
       self.status_label.text = f"Ghi nhận nhiệt độ {temp}°C và deltaBT {dBT} tại phút {time_string}"
     except ValueError:
       self.status_label.text = "Không ghi: nhiệt độ chưa hợp lệ"
-      
+
   def update_plot_latest(self, dataList):
     self.dataList = dataList
     if not self.dataList:
@@ -49,7 +49,7 @@ class Form1(Form1Template):
     self.plot_1.figure.data[0].y.append(bt)
     self.plot_1.figure.data[1].x.append(dt)
     self.plot_1.figure.data[1].y.append(dBT)
-    
+
   def add_annotation(self, dataList, text):
     if not dataList:
       return
@@ -117,10 +117,16 @@ class Form1(Form1Template):
     self.plot_1.layout.annotations = self.annotations
     self.drop_button.enabled = False
 
- 
+  def plot_1_hover(self, points, **event_args):
+    """This method is called when a data point is hovered."""
 
-  
-    
+    i = points
+    # print(f"Bạn vừa hover vào điểm: ({self.plot_1.figure.data[0].x[i]}, {self.plot_1.figure.data[0].y[i]})")
+    print (i)
+
+
+
+
 
 
 
