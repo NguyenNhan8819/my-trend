@@ -13,7 +13,9 @@ class Form1(Form1Template):
     self.annotations = [] # Tạo list lưu chú thích
     self.temp_box.text = 30 # Gán giá trị nhiệt độ ban đầu
     self.deltaBT_box.text = 20 # Gán giá trị nhiệt độ ban đầu
-    self.plot_1.figure = Trend.init_figure()
+    fig, config = Trend.init_figure()
+    self.plot_1.figure = fig
+    self.plot_1.config = config
     self.timer_1.interval = 0 # Ban đầu timer chưa hoạt động
 
   def start_button_click(self, **event_args):
