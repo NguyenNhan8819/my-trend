@@ -30,6 +30,10 @@ def init_figure():
         'tickformat': '%M:%S',
         'tickwidth': 1,
         'type': 'date',
+        'mirror':'all',
+        'showline':True,
+        'ticks':'',               # tắt tick
+        'showticklabels':True 
       },
       yaxis={
         'title': {
@@ -52,7 +56,7 @@ def init_figure():
       'overlaying': 'y',
       'side': 'right',
       'showgrid': False,
-      'showline': True
+      'showline': True,
       },
       legend=dict(
       x=0.95,           # Gần sát phải, nhưng không tràn qua trục y2
